@@ -1,0 +1,24 @@
+{
+  "name": "req-header-parser-ms",
+  "version": "1.0.0",
+  "description": "https://www.freecodecamp.com/challenges/request-header-parser-microservice",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subhojit777/reqHeaderParserMs.git"
+  },
+  "author": "Subhojit Paul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/subhojit777/reqHeaderParserMs/issues"
+  },
+  "homepage": "https://github.com/subhojit777/reqHeaderParserMs#readme"
+}
