@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -8,10 +9,21 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/whoami', function(req, res) {
-  res.status(200).json({
-    'ipaddress': req.headers['host'],
-    'language': req.headers['accept-language'],
-    'software': req.headers['user-agent']
+  var options = {
+    'host': 'ipinfo.io',
+    'path': '/ip'
+  };
+
+  http.get(options, function(response) {
+    response.setEncoding('utf8');
+
+    response.on('data', function(chunk) {
+      res.status(200).json({
+        'ipaddress': chunk.trim(),
+        'language': req.headers['accept-language'],
+        'software': req.headers['user-agent']
+      });
+    });
   });
 });
 
