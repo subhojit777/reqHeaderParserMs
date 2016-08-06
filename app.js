@@ -14,6 +14,14 @@ app.get('/api/whoami', function(req, res) {
     'host': 'ipinfo.io',
     'path': '/ip'
   };
+  var ipAddr = req.headers["x-forwarded-for"];
+  if (ipAddr){
+    var list = ipAddr.split(",");
+    ipAddr = list[list.length-1];
+  } else {
+    ipAddr = req.connection.remoteAddress;
+  }
+  console.log(ipAddr);
 
   //http.get(options, function(response) {
     //response.setEncoding('utf8');
