@@ -1,6 +1,4 @@
 var express = require('express');
-var http = require('http');
-var publicIp = require('public-ip');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -10,10 +8,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/whoami', function(req, res) {
-  var options = {
-    'host': 'ipinfo.io',
-    'path': '/ip'
-  };
+  // Obtain the requester's IP.
+  // This becomes necessary when you are accessing the microservice from Heroku.
+  // https://lostechies.com/derickbailey/2013/12/04/getting-the-real-client-ip-address-on-a-heroku-hosted-nodejs-app
   var ipAddr = req.headers["x-forwarded-for"];
   if (ipAddr){
     var list = ipAddr.split(",");
@@ -21,26 +18,11 @@ app.get('/api/whoami', function(req, res) {
   } else {
     ipAddr = req.connection.remoteAddress;
   }
-  console.log(ipAddr);
 
-  //http.get(options, function(response) {
-    //response.setEncoding('utf8');
-
-    //response.on('data', function(chunk) {
-      //res.status(200).json({
-        //'ipaddress': chunk.trim(),
-        //'language': req.headers['accept-language'],
-        //'software': req.headers['user-agent']
-      //});
-    //});
-  //});
-
-  publicIp.v4().then(ip => {
-    res.status(200).json({
-      'ipaddress': ip,
-      'language': req.headers['accept-language'],
-      'software': req.headers['user-agent']
-    });
+  res.status(200).json({
+    'ipaddress': ipAddr,
+    'language': req.headers['accept-language'],
+    'software': req.headers['user-agent']
   });
 });
 

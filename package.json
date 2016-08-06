@@ -4,8 +4,7 @@
   "description": "https://www.freecodecamp.com/challenges/request-header-parser-microservice",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.14.0",
-    "public-ip": "^2.0.1"
+    "express": "^4.14.0"
   },
   "devDependencies": {},
   "scripts": {
