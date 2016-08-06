@@ -1,10 +1,11 @@
 var express = require('express');
+var path = require('path');
 
 var app = express();
 var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res) {
-  res.status(200).send('Nothing here. Check ' + req.protocol + '://' + req.headers['host'] + '/api/whoami');
+  res.status(200).sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/api/whoami', function(req, res) {
